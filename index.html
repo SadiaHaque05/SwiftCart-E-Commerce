@@ -58,7 +58,9 @@
               class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li class="font-bold text-gray-700"><a>Home</a></li>
-              <li class="font-bold text-gray-700"><a>Products</a></li>
+              <li class="font-bold text-gray-700">
+                <a href="#" onclick="showProductsSection()">Products</a>
+              </li>
               <li class="font-bold text-gray-700"><a>About</a></li>
               <li class="font-bold text-gray-700"><a>Contact</a></li>
             </ul>
@@ -68,7 +70,9 @@
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal px-1">
             <li class="font-bold text-gray-700"><a>Home</a></li>
-            <li class="font-bold text-gray-700"><a>Products</a></li>
+            <li class="font-bold text-gray-700">
+              <a href="#" onclick="showProductsSection()">Products</a>
+            </li>
             <li class="font-bold text-gray-700"><a>About</a></li>
             <li class="font-bold text-gray-700"><a>Contact</a></li>
           </ul>
@@ -79,71 +83,113 @@
       </div>
     </header>
 
-    <!-- banner -->
-    <banner>
-      <div
-        class="hero h-110"
-        style="background-image: url(./Assets/banner-image.png)"
-      >
-        <div class="hero-overlay"></div>
-        <div class="hero-content text-neutral-content text-center">
-          <div class="max-w-md">
-            <h1 class="mb-5 text-4xl font-bold">Best Collection For You</h1>
-            <p class="mb-5">
-              Discover the latest trends in fasion,electronics and more.Shop
-              with confidence and style at SwiftCart.
-            </p>
-            <button class="btn btn-primary">Shop Now</button>
+    <div>
+      <!-- banner -->
+      <banner>
+        <div
+          class="hero h-110"
+          style="background-image: url(./Assets/banner-image.png)"
+        >
+          <div class="hero-overlay"></div>
+          <div class="hero-content text-neutral-content text-center">
+            <div class="max-w-md">
+              <h1 class="mb-5 text-4xl font-bold">Best Collection For You</h1>
+              <p class="mb-5">
+                Discover the latest trends in fasion,electronics and more.Shop
+                with confidence and style at SwiftCart.
+              </p>
+              <button class="btn btn-primary">Shop Now</button>
+            </div>
           </div>
         </div>
-      </div>
-    </banner>
+      </banner>
 
-    <!-- features -->
-    <section class="my-6 px-6">
-      <h2 class="text-2xl text-center font-bold mb-2">Why Choose Us</h2>
-      <p class="text-sm text-center text-gray-500 font-semibold mb-7">
-        We provide the best shopping experience with top-notch services.
-      </p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white p-4 rounded shadow text-center">
-          <i class="fa-solid fa-truck text-3xl text-blue-500 mb-2"></i>
-          <h3 class="font-semibold">Fast Delivery</h3>
-          <p class="text-sm text-gray-600">Get your orders quickly.</p>
+      <!-- features -->
+      <section class="my-6 px-6">
+        <h2 class="text-2xl text-center font-bold mb-2">Why Choose Us</h2>
+        <p class="text-sm text-center text-gray-500 font-semibold mb-7">
+          We provide the best shopping experience with top-notch services.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white p-4 rounded shadow text-center">
+            <i class="fa-solid fa-truck text-3xl text-blue-500 mb-2"></i>
+            <h3 class="font-semibold">Fast Delivery</h3>
+            <p class="text-sm text-gray-600">Get your orders quickly.</p>
+          </div>
+          <div class="bg-white p-4 rounded shadow text-center">
+            <i class="fa-solid fa-headset text-3xl text-blue-500 mb-2"></i>
+            <h3 class="font-semibold">24/7 Support</h3>
+            <p class="text-sm text-gray-600">We are here to help anytime.</p>
+          </div>
+          <div class="bg-white p-4 rounded shadow text-center">
+            <i class="fa-solid fa-lock text-3xl text-blue-500 mb-2"></i>
+            <h3 class="font-semibold">Secure Payment</h3>
+            <p class="text-sm text-gray-600">Your info is safe with us.</p>
+          </div>
+          <div class="bg-white p-4 rounded shadow text-center">
+            <i class="fa-solid fa-star text-3xl text-blue-500 mb-2"></i>
+            <h3 class="font-semibold">Top Quality</h3>
+            <p class="text-sm text-gray-600">Best products guaranteed.</p>
+          </div>
         </div>
-        <div class="bg-white p-4 rounded shadow text-center">
-          <i class="fa-solid fa-headset text-3xl text-blue-500 mb-2"></i>
-          <h3 class="font-semibold">24/7 Support</h3>
-          <p class="text-sm text-gray-600">We are here to help anytime.</p>
-        </div>
-        <div class="bg-white p-4 rounded shadow text-center">
-          <i class="fa-solid fa-lock text-3xl text-blue-500 mb-2"></i>
-          <h3 class="font-semibold">Secure Payment</h3>
-          <p class="text-sm text-gray-600">Your info is safe with us.</p>
-        </div>
-        <div class="bg-white p-4 rounded shadow text-center">
-          <i class="fa-solid fa-star text-3xl text-blue-500 mb-2"></i>
-          <h3 class="font-semibold">Top Quality</h3>
-          <p class="text-sm text-gray-600">Best products guaranteed.</p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Product Grid -->
-  <section class="my-6 px-6">
-    <h2 class="text-xl font-semibold mb-4">Products</h2>
-    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- trending -->
+      <section class="my-6 px-6">
+        <h2 class="text-xl font-semibold mb-4">Trending Products</h2>
+        <div
+          id="trending"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+        ></div>
+      </section>
     </div>
-  </section>
 
-    <!-- trending -->
-    <section class="my-6 px-6">
-      <h2 class="text-xl font-semibold mb-4">Trending Products</h2>
-      <div
-        id="trending"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
-      >
+    <!-- our products section -->
+    <section id="products-section" class="my-6 px-6 hidden">
+      <h2 class="text-3xl font-bold mb-2 text-center">Our Products</h2>
+      <p class="text-gray-600 text-center mb-4">
+        Browse our categories and find the perfect products
+      </p>
+
+      <!-- category -->
+      <div class="flex justify-center gap-3 my-4 flex-wrap">
+        <button
+          class="filter-btn btn btn-outline btn-sm active"
+          data-category="all"
+        >
+          All
+        </button>
+        <button
+          class="filter-btn btn btn-outline btn-sm"
+          data-category="electronics"
+        >
+          Electronics
+        </button>
+        <button
+          class="filter-btn btn btn-outline btn-sm"
+          data-category="jewelery"
+        >
+          Jewelery
+        </button>
+        <button
+          class="filter-btn btn btn-outline btn-sm"
+          data-category="men's clothing"
+        >
+          Men's Clothing
+        </button>
+        <button
+          class="filter-btn btn btn-outline btn-sm"
+          data-category="women's clothing"
+        >
+          Women's Clothing
+        </button>
       </div>
+
+      <!-- products -->
+      <div
+        id="product-grid"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      >
     </section>
 
     <!-- modal -->

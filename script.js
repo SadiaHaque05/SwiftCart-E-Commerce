@@ -1,44 +1,41 @@
-const categoryContainer = document.getElementById('categories');
+const allProducts = []; // store products
 const productGrid = document.getElementById('product-grid');
-const trendingGrid = document.getElementById('trending');
+const productsSection = document.getElementById('products-section');
+const homeContent = document.getElementById('home-content');
+const filterButtons = document.querySelectorAll('.filter-btn');
 
-const modal = document.getElementById('product-modal');
-const closeModalBtn = document.getElementById('close-modal');
-const modalImg = document.getElementById('modal-img');
-const modalTitle = document.getElementById('modal-title');
-const modalDesc = document.getElementById('modal-desc');
-const modalPrice = document.getElementById('modal-price');
-const modalRating = document.getElementById('modal-rating');
+// 🔴 Show products view
+function showProductsView() {
+  // hide homepage sections
+  homeContent.classList.add('hidden');
+  
+  // show products section
+  productsSection.classList.remove('hidden');
 
-async function loadCategories() {
-  try {
-    const res = await fetch('https://fakestoreapi.com/products/categories');
-    const categories = await res.json();
+  // scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    categories.forEach(category => {
-      const btn = document.createElement('button');
-      btn.className = 'bg-white px-4 py-2 rounded shadow hover:bg-blue-100 capitalize';
-      btn.innerText = category;
-      btn.addEventListener('click', () => loadProducts(category)); 
-      categoryContainer.appendChild(btn); 
-    });
-  } catch (error) {
-    console.error('Error loading categories:', error);
+  // load products only once
+  if (allProducts.length === 0) {
+    loadAllProducts();
   }
 }
 
-async function loadProducts(category) {
+// 🔴 Load products from API
+async function loadAllProducts() {
   try {
-    const res = await fetch(`https://fakestoreapi.com/products/category/${category}`);
+    const res = await fetch('https://fakestoreapi.com/products');
     const products = await res.json();
-    renderProducts(products);
+    products.forEach(p => allProducts.push(p));
+    renderProducts(allProducts);
   } catch (error) {
     console.error('Error loading products:', error);
   }
 }
 
+// 🔴 Render products
 function renderProducts(products) {
-  productGrid.innerHTML = ''; 
+  productGrid.innerHTML = '';
   products.forEach(product => {
     const card = document.createElement('div');
     card.className = 'bg-white p-4 rounded shadow flex flex-col';
@@ -57,51 +54,17 @@ function renderProducts(products) {
   });
 }
 
-async function loadTrending() {
-  try {
-    const res = await fetch('https://fakestoreapi.com/products');
-    const products = await res.json();
-    const top3 = products.sort((a,b) => b.rating.rate - a.rating.rate).slice(0,3);
-    trendingGrid.innerHTML = '';
-    top3.forEach(product => {
-      const card = document.createElement('div');
-      card.className = 'bg-white p-4 rounded shadow flex flex-col';
-      card.innerHTML = `
-        <img src="${product.image}" alt="${product.title}" class="h-48 object-contain mb-2">
-        <h3 class="font-semibold truncate mb-1">${product.title}</h3>
-        <p class="text-gray-700 mb-1">$${product.price}</p>
-        <p class="text-yellow-500 mb-2">⭐ ${product.rating.rate}</p>
-      `;
-      trendingGrid.appendChild(card);
-    });
-  } catch (error) {
-    console.error('Error loading trending products:', error);
-  }
-}
+// 🔴 Filter products
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
-async function showDetails(id) {
-  try {
-    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-    const product = await res.json();
-
-    modalImg.src = product.image;
-    modalTitle.innerText = product.title;
-    modalDesc.innerText = product.description;
-    modalPrice.innerText = `$${product.price}`;
-    modalRating.innerText = `⭐ ${product.rating.rate} (${product.rating.count})`;
-
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-  } catch (error) {
-    console.error('Error loading product details:', error);
-  }
-}
-
-closeModalBtn.addEventListener('click', () => {
-  modal.classList.add('hidden');
-  modal.classList.remove('flex');
+    const category = btn.dataset.category;
+    if (category === 'all') {
+      renderProducts(allProducts);
+    } else {
+      renderProducts(allProducts.filter(p => p.category === category));
+    }
+  });
 });
-
-loadCategories();
-loadProducts('electronics'); 
-loadTrending();
