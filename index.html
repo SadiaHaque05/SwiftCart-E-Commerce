@@ -88,7 +88,7 @@
       <banner>
         <div
           class="hero h-110"
-          style="background-image: url(./Assets/banner-image.png)"
+          style="background-image: url('./assets/banner-image.png')"
         >
           <div class="hero-overlay"></div>
           <div class="hero-content text-neutral-content text-center">
@@ -183,11 +183,16 @@
           Women's Clothing
         </button>
       </div>
+      <div id="loading-spinner" class="flex justify-center my-6">
+        <div
+          class="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"
+        ></div>
+      </div>
+
       <div
         id="product-grid"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-      >
-      </div>
+      ></div>
 
       <div class="flex justify-center my-6">
         <button id="back-home" class="btn btn-primary">Back to Home</button>
