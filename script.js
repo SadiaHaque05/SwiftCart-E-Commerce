@@ -3,6 +3,7 @@ const productGrid = document.getElementById('product-grid');
 const productsSection = document.getElementById('products-section');
 const homeContent = document.getElementById('home-content');
 const filterButtons = document.querySelectorAll('.filter-btn');
+const trendingGrid = document.getElementById('trending'); // 🔴 trending section
 
 // 🔴 Show products view
 function showProductsView() {
@@ -28,6 +29,7 @@ async function loadAllProducts() {
     const products = await res.json();
     products.forEach(p => allProducts.push(p));
     renderProducts(allProducts);
+    renderTrending(allProducts); // 🔴 render trending after loading products
   } catch (error) {
     console.error('Error loading products:', error);
   }
@@ -68,3 +70,25 @@ filterButtons.forEach(btn => {
     }
   });
 });
+
+// 🔴 Render Trending Products (first 3 products)
+function renderTrending(products) {
+  trendingGrid.innerHTML = '';
+  const trendingProducts = products.slice(0, 3); // first 3 products
+  trendingProducts.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'bg-white p-4 rounded shadow flex flex-col';
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.title}" class="h-48 object-contain mb-2">
+      <h3 class="font-semibold truncate mb-1">${product.title}</h3>
+      <p class="text-gray-700 mb-1">$${product.price}</p>
+      <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded self-start mb-2">${product.category}</span>
+      <p class="text-yellow-500 mb-2">⭐ ${product.rating.rate} (${product.rating.count})</p>
+      <div class="mt-auto flex gap-2">
+        <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600" onclick="showDetails(${product.id})">Details</button>
+        <button class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Add to Cart</button>
+      </div>
+    `;
+    trendingGrid.appendChild(card);
+  });
+}
